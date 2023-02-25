@@ -21,7 +21,7 @@ const handle = new Handlebars({ defaultLayout: '' })
 app.use(async (context, next) => {
   try {
 	console.log(context.request.url.href)
-	console.log(`authorised cookie: ${context.cookies.get('authorised')}`)
+	//console.log(`authorised cookie: ${context.cookies.get('authorised')}`)
     await next()
   } catch (err) {
 		console.log(err)

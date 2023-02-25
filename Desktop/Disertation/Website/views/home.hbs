@@ -2,18 +2,35 @@
 <html>
     <head>
         <meta charset="utf-8">
-		<title>Home Page</title>
+		<title>Dashboard</title>
 		<meta name="description" content="dashboard for portfolio managers">
 		<meta name="author" content="Rene Zbasnik">
 		<meta name="viewport" content= "width=device-width, initial-scale=1.0">
         <!--<script src="https://cdn.plot.ly/plotly-locale-fr-latest.js"></script>-->
-       <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> 
-        <script type="module" src="/main.js"></script>
-        <script type = "module" src = "/functions.js" defer></script>
+        <script src="https://cdn.plot.ly/plotly-2.18.2.min.js" charset="utf-8" ></script>
+        <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+        <!--<script type="module" src="/main.js"></script>-->
 		<!--<link href="/style.css" type="text/css" rel="stylesheet" /> -->
     </head>
     <body>
         <h1>Helper for portfolio managers</h1>
-        <div id="tester" style="width:600px;height:250px;"></div>
+        <div id="tester"></div>
+        <input type = "hidden" id = "value1" value = {{data}} />
+        <!--<input type = "hidden" id = "value2" value = {{data.y}} />-->
+
+        <script>
+            let data1 = document.getElementById("value1").value;
+            //let data2 = document.getElementById("value2").value;
+            //data = JSON.stringify(data1[0])
+            //let data = {x: [data1], y: [data2]}
+            //data = [data]
+            data1 = JSON.parse(data1)
+            console.log(data1)
+            Plotly.newPlot("tester", data1, {
+      title: 'Scroll and Zoom',
+      showlegend: false
+  });
+        </script>
+        
     </body>
 </html>
