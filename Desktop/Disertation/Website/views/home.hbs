@@ -14,10 +14,18 @@
     </head>
     <body>
         <h1>Helper for portfolio managers</h1>
+        <form action="/">
+            <label for="stock">Choose a stock:</label>
+                <select name='table' id="table">
+                 {{#each tables}}
+                <option value={{this}} >{{this}}</option>
+                {{/each}}
+                </select>
+</form> 
         <div id="tester"></div>
         <input type = "hidden" id = "value1" value = {{data}} />
         <!--<input type = "hidden" id = "value2" value = {{data.y}} />-->
-
+        
         <script>
             let data1 = document.getElementById("value1").value;
             //let data2 = document.getElementById("value2").value;
