@@ -2,9 +2,16 @@ import { db } from './db.js'
 import { Deplot } from "https://deno.land/x/deplot@0.3.0/mod.ts";
 
 
+export async function plot(){
+    let stock = await getStock();
+    let commodity = await getCommodity()
+    let data = {stock , commodity}
+    console.log(data)
+    return data
+}
 
 
-export async function getStock(){
+export async function getStock(data){
     //let sql = `SELECT * FROM apple;`
     const x = `SELECT Date FROM apple;`;
     const y = `SELECT Price FROM apple;`;
@@ -70,18 +77,9 @@ export async function getData(){
     let output = []
     tables.forEach( (value) => {
         console.log(value.Tables_in_website)
-        //for(key in value){
-        //    output.push(value[key])    
-        //}
-        //output = {table: value.Tables_in_website};
         output.push(value.Tables_in_website)
-        //console.log(output)
         return output
-        //output1.push(value.Date); 
     });
     console.log(output)
-    //let out = JSON.stringify(u2)
-    //let tables = {table: u2}
-    //console.log(tables)
     return output
 }

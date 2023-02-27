@@ -6,7 +6,6 @@
 		<meta name="description" content="dashboard for portfolio managers">
 		<meta name="author" content="Rene Zbasnik">
 		<meta name="viewport" content= "width=device-width, initial-scale=1.0">
-        <!--<script src="https://cdn.plot.ly/plotly-locale-fr-latest.js"></script>-->
         <script src="https://cdn.plot.ly/plotly-2.18.2.min.js" charset="utf-8" ></script>
         <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
         <!--<script type="module" src="/main.js"></script>-->
@@ -14,30 +13,39 @@
     </head>
     <body>
         <h1>Helper for portfolio managers</h1>
-        <form action="/">
             <label for="stock">Choose a stock:</label>
-                <select name='table' id="table">
+                <select onchange="MyJavaScript(this)"name='table' id="table">
                  {{#each tables}}
                 <option value={{this}} >{{this}}</option>
                 {{/each}}
                 </select>
-</form> 
-        <div id="tester"></div>
-        <input type = "hidden" id = "value1" value = {{data}} />
+                <br>
+            <label for="commodity">Choose a commodity:</label>
+                <select onchange="MyJavaScript(this)"name='table' id="table">
+                 {{#each tables}}
+                <option value={{this}} >{{this}}</option>
+                {{/each}}
+                </select>
+        <div id="stock"></div>
+        <div id="commodity"></div>
+        <input type = "hidden" id = "value1" value = {{dataS}} />
+        <input type = "hidden" id = "value2" value = {{dataC}} />
         <!--<input type = "hidden" id = "value2" value = {{data.y}} />-->
         
         <script>
-            let data1 = document.getElementById("value1").value;
-            //let data2 = document.getElementById("value2").value;
-            //data = JSON.stringify(data1[0])
-            //let data = {x: [data1], y: [data2]}
-            //data = [data]
-            data1 = JSON.parse(data1)
-            console.log(data1)
-            Plotly.newPlot("tester", data1, {
-      title: 'Scroll and Zoom',
-      showlegend: false
-  });
+            let dataS = document.getElementById("value1").value;
+            let dataC = document.getElementById("value2").value;
+            dataS = JSON.parse(dataS)
+            dataC = JSON.parse(dataC)
+            //console.log(dataS)
+            Plotly.newPlot("stock", dataS, {
+            title: 'Scroll and Zoom',
+            showlegend: false
+            });
+            Plotly.newPlot("commodity", dataC, {
+            title: 'Scroll and Zoom',
+            showlegend: false
+            });
         </script>
         
     </body>
