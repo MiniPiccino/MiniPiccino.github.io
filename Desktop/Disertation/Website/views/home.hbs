@@ -13,25 +13,27 @@
     </head>
     <body>
         <h1>Helper for portfolio managers</h1>
+        <form action = "/" method = "post">
             <label for="stock">Choose a stock:</label>
-                <select onchange="MyJavaScript(this)"name='table' id="table">
+                <select name='stock2' id="stock2">
                  {{#each tables}}
-                <option value={{this}} >{{this}}</option>
+                <option onclick="document.getElementById('{{this}}').submit();" id = {{this}} value={{this}} >{{this}}</option>
+                <!--onclick="document.getElementById('{{this}}').submit();"-->
                 {{/each}}
                 </select>
                 <br>
             <label for="commodity">Choose a commodity:</label>
-                <select onchange="MyJavaScript(this)"name='table' id="table">
+                <select name='commodity2' id="table">
                  {{#each tables}}
                 <option value={{this}} >{{this}}</option>
                 {{/each}}
                 </select>
+            <label><input type = "submit" name="submit" /></label>
+        </form>
         <div id="stock"></div>
         <div id="commodity"></div>
         <input type = "hidden" id = "value1" value = {{dataS}} />
         <input type = "hidden" id = "value2" value = {{dataC}} />
-        <!--<input type = "hidden" id = "value2" value = {{data.y}} />-->
-        
         <script>
             let dataS = document.getElementById("value1").value;
             let dataC = document.getElementById("value2").value;
@@ -39,12 +41,12 @@
             dataC = JSON.parse(dataC)
             //console.log(dataS)
             Plotly.newPlot("stock", dataS, {
-            title: 'Scroll and Zoom',
+            title: 'Stocks',
             showlegend: false
             });
             Plotly.newPlot("commodity", dataC, {
-            title: 'Scroll and Zoom',
-            showlegend: false
+            'title': 'Commodities',
+            'showlegend': false,
             });
         </script>
         

@@ -9,6 +9,7 @@ import router from './routes.js'
 
 Deno.env.delete('MODE') // clear the test mode if set
 
+
 const defaultPort = 8080
 const { args } = Deno
 const argPort = parse(args).port

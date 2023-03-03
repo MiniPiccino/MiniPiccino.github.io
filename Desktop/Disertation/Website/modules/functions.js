@@ -55,7 +55,7 @@ export async function getCommodity(){
     result2.forEach( (value) => {
         return output2.push(value.Price); 
     });
-    var trace1 = {
+    var trace1 = {  
       x: output1,
       y: output2,
       type: 'scatter'
