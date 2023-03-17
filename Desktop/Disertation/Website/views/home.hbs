@@ -15,20 +15,32 @@
         <h1>Helper for portfolio managers</h1>
         <form action = "/" method = "post">
             <label for="stock">Choose a stock:</label>
-                <select name='stock2' id="stock2">
-                 {{#each tables}}
-                <option onclick="document.getElementById('{{this}}').submit();" id = {{this}} value={{this}} >{{this}}</option>
-                <!--onclick="document.getElementById('{{this}}').submit();"-->
+                <select name='stock2' id="stock2" onchange="changeHappening();">
+                    {{#if stockData}}
+                    <option id = {{stockData}} value={{stockData}} >{{stockData}}</option>
+                    {{#each tables}}
+                    <option value={{this}}>{{this}}</option>
+                    {{/each}}
+                    {{else}}
+                {{#each tables}}
+                <option value={{this}}>{{this}}</option>
                 {{/each}}
+                {{/if}}
                 </select>
                 <br>
             <label for="commodity">Choose a commodity:</label>
-                <select name='commodity2' id="table">
-                 {{#each tables}}
-                <option value={{this}} >{{this}}</option>
+                <select name='commodity2' id="commodity2" onchange="changeHappening();">
+                    {{#if commodityData}}
+                    <option id = {{commodityData}} value={{commodityData}} >{{commodityData}}</option>
+                    {{#each tables}}
+                    <option value={{this}}>{{this}}</option>
+                    {{/each}}
+                    {{else}}
+                {{#each tables}}
+                <option value={{this}}>{{this}}</option>
                 {{/each}}
+                {{/if}}
                 </select>
-            <label><input type = "submit" name="submit" /></label>
         </form>
         <div id="stock"></div>
         <div id="commodity"></div>
@@ -38,16 +50,23 @@
             let dataS = document.getElementById("value1").value;
             let dataC = document.getElementById("value2").value;
             dataS = JSON.parse(dataS)
-            dataC = JSON.parse(dataC)
-            //console.log(dataS)
+            dataC = JSON.parse(dataC)   
             Plotly.newPlot("stock", dataS, {
             title: 'Stocks',
             showlegend: false
             });
             Plotly.newPlot("commodity", dataC, {
-            'title': 'Commodities',
-            'showlegend': false,
+            title: 'Commodities',
+            showlegend: false,
             });
+        const change = document.getElementById('stock2');
+        const change2 = document.getElementById('commodity2');
+        change.addEventListener('change', changeHappening);
+        change2.addEventListener('change', changeHappening);
+        function changeHappening(){
+            console.log(change.value);
+            this.form.submit();
+        }
         </script>
         
     </body>

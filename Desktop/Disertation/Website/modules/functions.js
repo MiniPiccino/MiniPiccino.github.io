@@ -13,8 +13,8 @@ export async function plot(){
 
 export async function getStock(data){
     //let sql = `SELECT * FROM apple;`
-    const x = `SELECT Date FROM apple;`;
-    const y = `SELECT Price FROM apple;`;
+    const x = `SELECT Date FROM ${data};`;
+    const y = `SELECT Price FROM ${data};`;
     const result1 = await db.query(x)
     const result2 = await db.query(y)
     const output1 = [];
@@ -41,10 +41,10 @@ export async function getStock(data){
     return datas
 }
 
-export async function getCommodity(){
+export async function getCommodity(data){
     //let sql = `SELECT * FROM apple;`
-    const x = `SELECT Date FROM gold;`;
-    const y = `SELECT Price FROM gold;`;
+    const x = `SELECT Date FROM ${data};`;
+    const y = `SELECT Price FROM ${data};`;
     const result1 = await db.query(x)
     const result2 = await db.query(y)
     const output1 = [];
