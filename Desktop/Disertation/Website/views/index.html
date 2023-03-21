@@ -1,1 +1,73 @@
-
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+		<title>Dashboard</title>
+		<meta name="description" content="dashboard for portfolio managers">
+		<meta name="author" content="Rene Zbasnik">
+		<meta name="viewport" content= "width=device-width, initial-scale=1.0">
+        <script src="https://cdn.plot.ly/plotly-2.18.2.min.js" charset="utf-8" ></script>
+        <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+        <!--<script type="module" src="/main.js"></script>-->
+		<!--<link href="/style.css" type="text/css" rel="stylesheet" /> -->
+    </head>
+    <body>
+        <h1>Helper for portfolio managers</h1>
+        <form action = "/" method = "post">
+            <label for="stock">Choose a stock:</label>
+                <select name='stock2' id="stock2" onchange="changeHappening();">
+                    {{#if stockData}}
+                    <option id = {{stockData}} value={{stockData}} >{{stockData}}</option>
+                    {{#each tables}}
+                    <option value={{this}}>{{this}}</option>
+                    {{/each}}
+                    {{else}}
+                {{#each tables}}
+                <option value={{this}}>{{this}}</option>
+                {{/each}}
+                {{/if}}
+                </select>
+                <br>
+            <label for="commodity">Choose a commodity:</label>
+                <select name='commodity2' id="commodity2" onchange="changeHappening();">
+                    {{#if commodityData}}
+                    <option id = {{commodityData}} value={{commodityData}} >{{commodityData}}</option>
+                    {{#each tables}}
+                    <option value={{this}}>{{this}}</option>
+                    {{/each}}
+                    {{else}}
+                {{#each tables}}
+                <option value={{this}}>{{this}}</option>
+                {{/each}}
+                {{/if}}
+                </select>
+        </form>
+        <div id="stock"></div>
+        <div id="commodity"></div>
+        <input type = "hidden" id = "value1" value = {{dataS}} />
+        <input type = "hidden" id = "value2" value = {{dataC}} />
+        <script>
+            let dataS = document.getElementById("value1").value;
+            let dataC = document.getElementById("value2").value;
+            dataS = JSON.parse(dataS)
+            dataC = JSON.parse(dataC)   
+            Plotly.newPlot("stock", dataS, {
+            title: 'Stocks',
+            showlegend: false
+            });
+            Plotly.newPlot("commodity", dataC, {
+            title: 'Commodities',
+            showlegend: false,
+            });
+        const change = document.getElementById('stock2');
+        const change2 = document.getElementById('commodity2');
+        change.addEventListener('change', changeHappening);
+        change2.addEventListener('change', changeHappening);
+        function changeHappening(){
+            console.log(change.value);
+            this.form.submit();
+        }
+        </script>
+        
+    </body>
+</html>
